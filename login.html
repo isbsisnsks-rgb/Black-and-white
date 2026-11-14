@@ -104,6 +104,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .pm .num{font:700 1.05rem var(--display);letter-spacing:.12em;margin-bottom:14px;overflow-wrap:anywhere}
 .pm .bot{display:flex;justify-content:space-between;gap:10px;font-size:.8rem;color:var(--dim)}
 .pm .bot span{overflow-wrap:anywhere}
+#v-home.on>.pane{animation-duration:.28s;animation-delay:0s}
 @media (prefers-reduced-motion:reduce){.nav button,.ind,.rf{transition:none}.view.on>*,.brand,.go::after,.shake{animation:none}.field label,.go,.toast{transition:none}}
 </style>
 </head>
@@ -331,7 +332,6 @@ function tab(n){
   $("main").scrollTop=0;
 }
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>tab(b.dataset.tab)));
-$("#goPay").addEventListener("click",()=>{tab("pay");$("#addbox").hidden=false});
 const fmt=d=>d?new Date(d).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"}):"-";
 function setAvatar(){
   const av=$("#av");av.textContent="";

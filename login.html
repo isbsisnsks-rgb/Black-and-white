@@ -28,8 +28,8 @@ main{position:relative;height:100%;max-width:360px;margin:0 auto;padding:76px 26
 .view.on>*{animation:rise .75s cubic-bezier(.2,.8,.2,1) backwards}
 .view.on>:nth-child(2){animation-delay:.08s}.view.on>:nth-child(3){animation-delay:.16s}.view.on>:nth-child(4){animation-delay:.24s}.view.on>:nth-child(5){animation-delay:.32s}.view.on>:nth-child(6){animation-delay:.4s}
 @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,11vw,3rem);line-height:.95;letter-spacing:-.04em;margin:0 0 12px}
-.sub{margin:0 0 26px;color:var(--dim);font-size:.9rem;line-height:1.5}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,10vw,2.7rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 12px;overflow-wrap:break-word}
+.sub{margin:0 0 26px;color:var(--dim);font-size:.9rem;line-height:1.55;overflow-wrap:anywhere}
 .sub b{color:var(--ink);font-weight:600;word-break:break-all}
 .field{position:relative;margin-bottom:18px}
 .field input{width:100%;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:500 1.05rem var(--body);padding:20px 52px 8px 0;border-radius:0;outline:none;transition:border-color .25s}
@@ -64,17 +64,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translate(-50%,20px);width:max-content;max-width:min(92vw,340px);background:#151515;border:1px solid var(--line);color:var(--ink);padding:12px 16px;border-radius:14px;font-size:.85rem;line-height:1.4;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:5}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 [hidden]{display:none!important}
-#v-home{margin:0 0 auto}
+#v-home{margin:0 0 auto;padding-bottom:112px}
 .pane{display:flex;flex-direction:column}
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.tile{border:1px solid var(--line);border-radius:16px;padding:14px}
-.tile small{display:block;color:var(--dim);font-size:.75rem;margin-bottom:6px}
-.tile b{font:700 1.05rem var(--display)}
-.nav{position:fixed;z-index:3;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);left:0;right:0;width:min(308px,calc(100% - 52px));margin:0 auto;display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(10,10,10,.85);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.nav button{flex:1;border:0;background:none;color:var(--dim);font:600 .82rem var(--body);padding:10px 0;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
-.nav button.on{background:var(--ink);color:#000}
-.pm{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
-.pm small{display:block;color:var(--dim);margin-top:3px;word-break:break-all}
 .empty{color:var(--dim);font-size:.9rem;margin:0 0 16px}
 .seg{display:flex;gap:6px;margin:16px 0 8px}
 .seg button{flex:1;padding:10px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--dim);font:600 .85rem var(--body);cursor:pointer}
@@ -82,7 +73,38 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .note{color:var(--dim);font-size:.78rem;line-height:1.5;margin:14px 0 0}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .gap{margin-top:10px}
-@media (prefers-reduced-motion:reduce){.nav button{transition:none}.view.on>*,.brand,.go::after,.shake{animation:none}.field label,.go,.toast{transition:none}}
+.eyebrow{margin:0 0 6px;color:var(--glow);font-size:.82rem;font-weight:600}
+.hero{display:flex;align-items:center;gap:16px;border:1px solid #2f2f2f;border-radius:22px;padding:16px;margin:4px 0 14px;background:linear-gradient(140deg,#14151b,#0a0a0c)}
+.hero strong{display:block;font:700 1.05rem var(--display);margin-bottom:3px}
+.hero small{color:var(--dim);font-size:.82rem}
+.ring{position:relative;width:64px;height:64px;flex:none}
+.ring svg{width:100%;height:100%}
+.rb,.rf{fill:none;stroke-width:4}.rb{stroke:var(--line)}
+.rf{stroke:var(--glow);stroke-linecap:round;stroke-dasharray:113.1;stroke-dashoffset:113.1;transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font:800 .85rem var(--display)}
+.steps{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.steps li{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:.9rem}
+.steps .dot{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--dim);display:grid;place-items:center;flex:none;font-size:.7rem}
+.steps li.done{color:var(--dim)}
+.steps li.done .dot{background:var(--ok);border-color:var(--ok);color:#000}
+.steps li button{margin-left:auto;background:none;border:0;color:var(--glow);font:600 .8rem var(--body);cursor:pointer;padding:0}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}
+.tile small{display:block;color:var(--dim);font-size:.72rem;margin-bottom:6px}
+.tile b{display:block;font:700 .98rem var(--display);overflow-wrap:anywhere}
+.nav{position:fixed;z-index:3;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);left:0;right:0;width:min(320px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);padding:6px;border:1px solid #2f2f2f;border-radius:26px;background:rgba(14,14,16,.78);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06)}
+.ind{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/3);border-radius:20px;background:linear-gradient(160deg,#fff,#d9deff);box-shadow:0 6px 20px rgba(185,196,255,.25);transition:transform .38s cubic-bezier(.3,1.3,.5,1)}
+.nav button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;color:var(--dim);font:600 .68rem var(--body);padding:9px 0 8px;cursor:pointer;transition:color .25s}
+.nav button.on{color:#000}
+.nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pm{position:relative;overflow:hidden;border-radius:20px;padding:16px;margin-bottom:12px;border:1px solid #2f2f2f;background:linear-gradient(140deg,#17181d,#0b0b0d 60%,#15172a)}
+.pm::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(185,196,255,.22),transparent 70%);pointer-events:none}
+.pm .top,.pm .num,.pm .bot{position:relative;z-index:1}
+.pm .top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;font-weight:600;margin-bottom:18px}
+.pm .num{font:700 1.05rem var(--display);letter-spacing:.12em;margin-bottom:14px;overflow-wrap:anywhere}
+.pm .bot{display:flex;justify-content:space-between;gap:10px;font-size:.8rem;color:var(--dim)}
+.pm .bot span{overflow-wrap:anywhere}
+@media (prefers-reduced-motion:reduce){.nav button,.ind,.rf{transition:none}.view.on>*,.brand,.go::after,.shake{animation:none}.field label,.go,.toast{transition:none}}
 </style>
 </head>
 <body>
@@ -124,17 +146,20 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 
   <section class="view" id="v-home">
     <div class="pane" id="p-dash">
+      <p class="eyebrow" id="greet">Welcome to Black Side</p>
       <h1 id="hi">Hi</h1>
-      <p class="sub">Here’s a quick look at your account.</p>
+      <div class="hero">
+        <div class="ring"><svg viewBox="0 0 44 44" aria-hidden="true"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rf" id="rf" cx="22" cy="22" r="18" transform="rotate(-90 22 22)"/></svg><b id="pct">0%</b></div>
+        <div><strong id="hs">Finish setting up</strong><small id="hd"></small></div>
+      </div>
+      <ul class="steps" id="steps"></ul>
       <div class="tiles">
         <div class="tile"><small>Member since</small><b id="t-since">-</b></div>
         <div class="tile"><small>Last login</small><b id="t-last">-</b></div>
         <div class="tile"><small>Sign-in method</small><b id="t-via">-</b></div>
         <div class="tile"><small>Payment methods</small><b id="t-pay">0</b></div>
       </div>
-      <button class="go" id="goPay" type="button">Add a payment method</button>
     </div>
-
     <div class="pane" id="p-pay" hidden>
       <h1>Payments</h1>
       <p class="sub">Your saved payment methods.</p>
@@ -171,9 +196,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     </div>
 
     <nav class="nav" aria-label="Sections">
-      <button type="button" data-tab="dash" class="on">Dashboard</button>
-      <button type="button" data-tab="pay">Payments</button>
-      <button type="button" data-tab="me">Profile</button>
+      <span class="ind" id="ind"></span>
+      <button type="button" data-tab="dash" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Dashboard</span></button>
+      <button type="button" data-tab="pay"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10.5h18"/></svg><span>Payments</span></button>
+      <button type="button" data-tab="me"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg><span>Profile</span></button>
     </nav>
   </section>
 </main>
@@ -300,6 +326,7 @@ function savePay(){try{localStorage.setItem(payKey(),JSON.stringify(pay))}catch(
 function tab(n){
   document.querySelectorAll(".pane").forEach(p=>{p.hidden=p.id!=="p-"+n});
   document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===n));
+  $("#ind").style.transform="translateX("+(["dash","pay","me"].indexOf(n)*100)+"%)";
   if(n==="dash")renderDash();
   $("main").scrollTop=0;
 }
@@ -312,7 +339,27 @@ function setAvatar(){
   else av.textContent=((me.displayName||me.email||"?")[0]).toUpperCase();
 }
 function renderDash(){
+  $("#greet").textContent="Welcome to Black Side";
   $("#hi").textContent="Hi, "+(me.displayName||me.email||"").split(/[ @]/)[0];
+  const st=[
+    {ok:me.emailVerified,t:"Verify your email"},
+    {ok:!!me.displayName,t:"Add your name",tab:"me"},
+    {ok:pay.length>0,t:"Add a payment method",tab:"pay"}
+  ];
+  const done=st.filter(x=>x.ok).length;
+  $("#pct").textContent=Math.round(done/st.length*100)+"%";
+  $("#hs").textContent=done===st.length?"All set":"Finish setting up";
+  $("#hd").textContent=done+" of "+st.length+" steps done";
+  $("#rf").style.strokeDashoffset=String(113.1*(1-done/st.length));
+  const ul=$("#steps");ul.textContent="";
+  st.forEach(x=>{
+    const li=document.createElement("li");if(x.ok)li.className="done";
+    const d=document.createElement("span");d.className="dot";d.textContent=x.ok?"✓":"";
+    const t=document.createElement("span");t.textContent=x.t;
+    li.append(d,t);
+    if(!x.ok&&x.tab){const b=document.createElement("button");b.type="button";b.textContent="Start";b.addEventListener("click",()=>tab(x.tab));li.appendChild(b)}
+    ul.appendChild(li);
+  });
   $("#t-since").textContent=fmt(me.metadata.creationTime);
   $("#t-last").textContent=fmt(me.metadata.lastSignInTime);
   $("#t-via").textContent=me.providerData.some(p=>p.providerId==="google.com")?"Google":"Email";
@@ -321,15 +368,16 @@ function renderDash(){
 function renderPay(){
   const l=$("#plist");l.textContent="";
   if(!pay.length){const p=document.createElement("p");p.className="empty";p.textContent="No payment methods yet.";l.appendChild(p);return}
+  const mk=(c,t)=>{const e=document.createElement("div");e.className=c;if(t!=null)e.textContent=t;return e};
   pay.forEach((m,i)=>{
-    const r=document.createElement("div");r.className="pm";
-    const t=document.createElement("div"),a=document.createElement("b"),s=document.createElement("small");
-    a.textContent=m.type==="upi"?"UPI":m.brand+" •••• "+m.last4;
-    s.textContent=m.type==="upi"?m.upi:m.name+" · "+m.exp;
-    t.append(a,s);
+    const r=mk("pm"),top=mk("top"),num=mk("num"),bot=mk("bot");
+    top.appendChild(mk("",m.type==="upi"?"UPI":m.brand));
     const d=document.createElement("button");d.className="link";d.textContent="Remove";
     d.addEventListener("click",()=>{pay.splice(i,1);savePay();renderPay();renderDash()});
-    r.append(t,d);l.appendChild(r);
+    top.appendChild(d);
+    if(m.type==="upi"){num.textContent=m.upi;num.style.letterSpacing="0";bot.append(mk("","Linked UPI ID"))}
+    else{num.textContent="•••• •••• •••• "+m.last4;const a=document.createElement("span");a.textContent=m.name;const b=document.createElement("span");b.textContent="Exp "+m.exp;bot.append(a,b)}
+    r.append(top,num,bot);l.appendChild(r);
   });
 }
 function enterHome(u){

@@ -28,7 +28,7 @@ main{position:relative;height:100%;max-width:360px;margin:0 auto;padding:76px 26
 .view.on>*{animation:rise .75s cubic-bezier(.2,.8,.2,1) backwards}
 .view.on>:nth-child(2){animation-delay:.08s}.view.on>:nth-child(3){animation-delay:.16s}.view.on>:nth-child(4){animation-delay:.24s}.view.on>:nth-child(5){animation-delay:.32s}.view.on>:nth-child(6){animation-delay:.4s}
 @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,10vw,2.7rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 12px;overflow-wrap:break-word}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,8.2vw,2.3rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:normal}
 .sub{margin:0 0 26px;color:var(--dim);font-size:.9rem;line-height:1.55;overflow-wrap:anywhere}
 .sub b{color:var(--ink);font-weight:600;word-break:break-all}
 .field{position:relative;margin-bottom:18px}
@@ -73,6 +73,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .note{color:var(--dim);font-size:.78rem;line-height:1.5;margin:14px 0 0}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .gap{margin-top:10px}
+.ver{position:fixed;left:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 6px);font-size:.62rem;color:#444;pointer-events:none;z-index:1}
 .eyebrow{margin:0 0 6px;color:var(--glow);font-size:.82rem;font-weight:600}
 .hero{display:flex;align-items:center;gap:16px;border:1px solid #2f2f2f;border-radius:22px;padding:16px;margin:4px 0 14px;background:linear-gradient(140deg,#14151b,#0a0a0c)}
 .hero strong{display:block;font:700 1.05rem var(--display);margin-bottom:3px}
@@ -111,6 +112,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <body>
 <div class="grid"></div><div class="halo"></div>
 <div class="brand">Black Side</div>
+<div class="ver">v8</div>
 <div class="toast" id="toast" role="status"></div>
 <main>
   <section class="view on" id="v-login">

@@ -63,7 +63,26 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .card b{color:var(--ok);font-weight:600}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translate(-50%,20px);width:max-content;max-width:min(92vw,340px);background:#151515;border:1px solid var(--line);color:var(--ink);padding:12px 16px;border-radius:14px;font-size:.85rem;line-height:1.4;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:5}
 .toast.on{opacity:1;transform:translate(-50%,0)}
-@media (prefers-reduced-motion:reduce){.view.on>*,.brand,.go::after,.shake{animation:none}.field label,.go,.toast{transition:none}}
+[hidden]{display:none!important}
+#v-home{margin:0 0 auto}
+.pane{display:flex;flex-direction:column}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.tile{border:1px solid var(--line);border-radius:16px;padding:14px}
+.tile small{display:block;color:var(--dim);font-size:.75rem;margin-bottom:6px}
+.tile b{font:700 1.05rem var(--display)}
+.nav{position:fixed;z-index:3;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);left:0;right:0;width:min(308px,calc(100% - 52px));margin:0 auto;display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(10,10,10,.85);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.nav button{flex:1;border:0;background:none;color:var(--dim);font:600 .82rem var(--body);padding:10px 0;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.nav button.on{background:var(--ink);color:#000}
+.pm{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+.pm small{display:block;color:var(--dim);margin-top:3px;word-break:break-all}
+.empty{color:var(--dim);font-size:.9rem;margin:0 0 16px}
+.seg{display:flex;gap:6px;margin:16px 0 8px}
+.seg button{flex:1;padding:10px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--dim);font:600 .85rem var(--body);cursor:pointer}
+.seg button.on{color:var(--ink);border-color:var(--glow)}
+.note{color:var(--dim);font-size:.78rem;line-height:1.5;margin:14px 0 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gap{margin-top:10px}
+@media (prefers-reduced-motion:reduce){.nav button{transition:none}.view.on>*,.brand,.go::after,.shake{animation:none}.field label,.go,.toast{transition:none}}
 </style>
 </head>
 <body>
@@ -104,16 +123,64 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   </section>
 
   <section class="view" id="v-home">
-    <h1>You’re in.</h1>
-    <div class="me"><div class="av" id="av"></div><div><small>Signed in as</small><span id="he"></span></div></div>
-    <div class="card"><b>Verified</b><br>Your account is active and this device is signed in.</div>
-    <button class="go ghost" id="out">Log out</button>
+    <div class="pane" id="p-dash">
+      <h1 id="hi">Hi</h1>
+      <p class="sub">Here’s a quick look at your account.</p>
+      <div class="tiles">
+        <div class="tile"><small>Member since</small><b id="t-since">-</b></div>
+        <div class="tile"><small>Last login</small><b id="t-last">-</b></div>
+        <div class="tile"><small>Sign-in method</small><b id="t-via">-</b></div>
+        <div class="tile"><small>Payment methods</small><b id="t-pay">0</b></div>
+      </div>
+      <button class="go" id="goPay" type="button">Add a payment method</button>
+    </div>
+
+    <div class="pane" id="p-pay" hidden>
+      <h1>Payments</h1>
+      <p class="sub">Your saved payment methods.</p>
+      <div id="plist"></div>
+      <button class="go ghost" id="addbtn" type="button">Add payment method</button>
+      <div id="addbox" hidden>
+        <div class="seg"><button type="button" data-t="upi" class="on">UPI</button><button type="button" data-t="card">Card</button></div>
+        <form id="addpay" novalidate>
+          <div id="f-upi">
+            <div class="field"><input id="pu" type="text" autocomplete="off" autocapitalize="none" placeholder=" "><label for="pu">UPI ID (name@bank)</label><span class="msg"></span></div>
+          </div>
+          <div id="f-card" hidden>
+            <div class="field"><input id="pn" type="text" autocomplete="cc-name" placeholder=" "><label for="pn">Name on card</label><span class="msg"></span></div>
+            <div class="field"><input id="pc" type="text" inputmode="numeric" autocomplete="cc-number" placeholder=" "><label for="pc">Card number</label><span class="msg"></span></div>
+            <div class="two">
+              <div class="field"><input id="pe" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder=" "><label for="pe">MM/YY</label><span class="msg"></span></div>
+              <div class="field"><input id="pv" type="password" inputmode="numeric" maxlength="4" autocomplete="cc-csc" placeholder=" "><label for="pv">CVV</label><span class="msg"></span></div>
+            </div>
+          </div>
+          <button class="go" type="submit">Save method</button>
+        </form>
+        <p class="note">Demo only: nothing is charged. Only the card brand, last 4 digits and expiry are kept, on this device. The full number and CVV are never saved. Real payments need a provider such as Razorpay or Stripe.</p>
+      </div>
+    </div>
+
+    <div class="pane" id="p-me" hidden>
+      <h1>Profile</h1>
+      <div class="me gap"><div class="av" id="av"></div><div><small>Signed in as</small><span id="he"></span></div></div>
+      <div class="field"><input id="pname" type="text" autocomplete="name" placeholder=" "><label for="pname">Your name</label><span class="msg"></span></div>
+      <button class="go ghost" id="savename" type="button">Save name</button>
+      <div class="card gap"><b>Verified</b><br>Your account is active and this device is signed in.</div>
+      <button class="go ghost" id="reset" type="button">Send password reset email</button>
+      <button class="go ghost gap" id="out" type="button">Log out</button>
+    </div>
+
+    <nav class="nav" aria-label="Sections">
+      <button type="button" data-tab="dash" class="on">Dashboard</button>
+      <button type="button" data-tab="pay">Payments</button>
+      <button type="button" data-tab="me">Profile</button>
+    </nav>
   </section>
 </main>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendEmailVerification,sendPasswordResetEmail,GoogleAuthProvider,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendEmailVerification,sendPasswordResetEmail,updateProfile,GoogleAuthProvider,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const app=initializeApp({
   apiKey:"AIzaSyA1ZZSIFslMnFbwx8_fJTRECzZQAHEB_pQ",
@@ -225,17 +292,103 @@ $("#vb").addEventListener("click",async e=>{
 $("#other").addEventListener("click",async()=>{await signOut(auth);show("signup")});
 $("#out").addEventListener("click",()=>signOut(auth));
 
+// HOME APP
+let me=null,pay=[],ptype="upi";
+const payKey=()=>"bs_pay_"+me.uid;
+function loadPay(){try{return JSON.parse(localStorage.getItem(payKey())||"[]")}catch(e){return []}}
+function savePay(){try{localStorage.setItem(payKey(),JSON.stringify(pay))}catch(e){}}
+function tab(n){
+  document.querySelectorAll(".pane").forEach(p=>{p.hidden=p.id!=="p-"+n});
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===n));
+  if(n==="dash")renderDash();
+  $("main").scrollTop=0;
+}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>tab(b.dataset.tab)));
+$("#goPay").addEventListener("click",()=>{tab("pay");$("#addbox").hidden=false});
+const fmt=d=>d?new Date(d).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"}):"-";
+function setAvatar(){
+  const av=$("#av");av.textContent="";
+  if(me.photoURL){const im=document.createElement("img");im.alt="";im.referrerPolicy="no-referrer";im.src=me.photoURL;av.appendChild(im)}
+  else av.textContent=((me.displayName||me.email||"?")[0]).toUpperCase();
+}
+function renderDash(){
+  $("#hi").textContent="Hi, "+(me.displayName||me.email||"").split(/[ @]/)[0];
+  $("#t-since").textContent=fmt(me.metadata.creationTime);
+  $("#t-last").textContent=fmt(me.metadata.lastSignInTime);
+  $("#t-via").textContent=me.providerData.some(p=>p.providerId==="google.com")?"Google":"Email";
+  $("#t-pay").textContent=pay.length;
+}
+function renderPay(){
+  const l=$("#plist");l.textContent="";
+  if(!pay.length){const p=document.createElement("p");p.className="empty";p.textContent="No payment methods yet.";l.appendChild(p);return}
+  pay.forEach((m,i)=>{
+    const r=document.createElement("div");r.className="pm";
+    const t=document.createElement("div"),a=document.createElement("b"),s=document.createElement("small");
+    a.textContent=m.type==="upi"?"UPI":m.brand+" •••• "+m.last4;
+    s.textContent=m.type==="upi"?m.upi:m.name+" · "+m.exp;
+    t.append(a,s);
+    const d=document.createElement("button");d.className="link";d.textContent="Remove";
+    d.addEventListener("click",()=>{pay.splice(i,1);savePay();renderPay();renderDash()});
+    r.append(t,d);l.appendChild(r);
+  });
+}
+function enterHome(u){
+  me=u;pay=loadPay();
+  $("#he").textContent=u.email||"";
+  $("#pname").value=u.displayName||"";
+  $("#reset").hidden=!u.providerData.some(p=>p.providerId==="password");
+  setAvatar();renderPay();tab("dash");show("home");
+}
+function setType(t){
+  ptype=t;$("#f-upi").hidden=t!=="upi";$("#f-card").hidden=t!=="card";
+  document.querySelectorAll(".seg button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
+}
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>setType(b.dataset.t)));
+$("#addbtn").addEventListener("click",()=>{const b=$("#addbox");b.hidden=!b.hidden});
+$("#pc").addEventListener("input",e=>{e.target.value=e.target.value.replace(/\D/g,"").slice(0,19).replace(/(.{4})/g,"$1 ").trim()});
+$("#pe").addEventListener("input",e=>{let v=e.target.value.replace(/\D/g,"").slice(0,4);if(v.length>2)v=v.slice(0,2)+"/"+v.slice(2);e.target.value=v});
+const luhn=n=>{let s=0,d=false;for(let i=n.length-1;i>=0;i--){let x=+n[i];if(d){x*=2;if(x>9)x-=9}s+=x;d=!d}return s%10===0};
+const cardBrand=n=>/^4/.test(n)?"Visa":/^(5[1-5]|2[2-7])/.test(n)?"Mastercard":/^3[47]/.test(n)?"Amex":/^(60|65|81|82|508)/.test(n)?"RuPay":"Card";
+$("#addpay").addEventListener("submit",e=>{
+  e.preventDefault();
+  let m;
+  if(ptype==="upi"){
+    const i=$("#pu"),v=i.value.trim();
+    if(!flag(i,/^[\w.\-]{2,}@[a-zA-Z]{2,}$/.test(v)?"":"Enter a valid UPI ID, like name@bank"))return;
+    m={type:"upi",upi:v};
+  }else{
+    const n=$("#pn"),c=$("#pc"),x=$("#pe"),v=$("#pv"),num=c.value.replace(/\D/g,"");
+    let ok=flag(n,n.value.trim()?"":"Enter the name on the card");
+    ok=flag(c,num.length>=13&&luhn(num)?"":"Enter a valid card number")&&ok;
+    const mm=x.value.match(/^(\d\d)\/(\d\d)$/);
+    const exp=mm?new Date(2000+Number(mm[2]),Number(mm[1]),1):null;
+    ok=flag(x,mm&&Number(mm[1])>=1&&Number(mm[1])<=12&&exp>new Date()?"":"Enter a valid future date (MM/YY)")&&ok;
+    ok=flag(v,/^\d{3,4}$/.test(v.value)?"":"Enter the 3 or 4 digit CVV")&&ok;
+    if(!ok){shake(e.target);return}
+    m={type:"card",name:n.value.trim(),brand:cardBrand(num),last4:num.slice(-4),exp:x.value};
+  }
+  pay.push(m);savePay();renderPay();renderDash();
+  e.target.reset();$("#addbox").hidden=true;
+  toast("Saved. Demo only: nothing is charged.");
+});
+$("#savename").addEventListener("click",async e=>{
+  await run(e.currentTarget,"Saving...",async()=>{
+    try{await updateProfile(auth.currentUser,{displayName:$("#pname").value.trim()});me=auth.currentUser;setAvatar();renderDash();toast("Name updated.")}
+    catch(err){toast(errText(err))}
+  });
+});
+$("#reset").addEventListener("click",async()=>{
+  try{await sendPasswordResetEmail(auth,me.email);toast("Reset link sent to "+me.email)}
+  catch(err){toast(errText(err))}
+});
+
 // ROUTING
 function route(u){
   if(!u){if(view==="home"||view==="verify")show("login");return}
   ["#le","#lp","#se","#sp"].forEach(s=>{const i=$(s);i.value="";flag(i,"")});
   $("#vm").textContent="";
   if(!u.emailVerified){$("#ve").textContent=u.email;show("verify");return}
-  $("#he").textContent=u.email||u.displayName||"";
-  const av=$("#av");av.textContent="";
-  if(u.photoURL){const im=document.createElement("img");im.alt="";im.referrerPolicy="no-referrer";im.src=u.photoURL;av.appendChild(im)}
-  else av.textContent=((u.email||u.displayName||"?")[0]).toUpperCase();
-  show("home");
+  enterHome(u);
 }
 onAuthStateChanged(auth,route);
 </script>

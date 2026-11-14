@@ -68,7 +68,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 [hidden]{display:none!important}
 #v-home{margin:0 0 auto;padding-bottom:112px}
 .pane{display:flex;flex-direction:column}
-.empty{color:var(--dim);font-size:.9rem;margin:0 0 16px}
+.empty{color:var(--dim);font-size:.92rem;text-align:center;margin:0 0 14px;padding:26px 16px;border:1px dashed #33333d;border-radius:20px}
 .seg{display:flex;gap:6px;margin:16px 0 8px}
 .seg button{flex:1;padding:10px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--dim);font:600 .85rem var(--body);cursor:pointer}
 .seg button.on{color:var(--ink);border-color:var(--glow)}
@@ -117,6 +117,34 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .chips button{flex:1;padding:9px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--dim);font:600 .85rem var(--body);cursor:pointer}
 .chips button:active{color:var(--ink);border-color:var(--glow)}
 .go[disabled]{cursor:default}
+.tile{background:linear-gradient(140deg,#14151b,#0a0a0c);border-color:#2a2a33}
+.hero{box-shadow:0 0 40px rgba(185,196,255,.07)}
+.quick{display:flex;align-items:center;gap:14px;margin-top:12px;border:1px solid #2f2f2f;border-radius:22px;padding:16px;background:linear-gradient(140deg,#17181d,#0b0b0d 60%,#15172a)}
+.quick div{flex:1}.quick strong{display:block;font:700 1.05rem var(--display);margin-bottom:3px}.quick small{color:var(--dim);font-size:.82rem}
+.quick .go{width:auto;margin:0;padding:12px 22px}
+.pcard{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;border:1px solid #2f2f2f;border-radius:26px;padding:28px 18px 22px;margin:4px 0 12px;background:linear-gradient(160deg,#17181f,#0a0a0c 65%)}
+.pcard::after{content:"";position:absolute;left:50%;top:-60px;width:220px;height:220px;margin-left:-110px;border-radius:50%;background:radial-gradient(circle,rgba(185,196,255,.2),transparent 70%);pointer-events:none}
+.pcard>*{position:relative;z-index:1}
+.pcard .av{width:84px;height:84px;font-size:2rem;box-shadow:0 8px 30px rgba(185,196,255,.3)}
+.pcard h2{font:800 1.35rem var(--display);margin:16px 0 4px;overflow-wrap:anywhere}
+.pcard .em{color:var(--dim);font-size:.88rem;word-break:break-all}
+.badge{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:6px 12px;border-radius:999px;background:rgba(155,232,181,.1);border:1px solid #2f4a38;color:var(--ok);font:600 .78rem var(--body)}
+.go.danger{color:var(--err);border-color:#4a2a2a}
+.gwrap{padding:0;overflow:hidden}
+.gtop{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px 2px}
+.live{display:flex;align-items:center;gap:8px;font:600 .8rem var(--body);color:var(--ink);white-space:nowrap}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.live i.wait{background:var(--glow);animation:blink 1.2s infinite}
+.live i.fly{background:var(--ok);box-shadow:0 0 10px var(--ok)}
+.live i.crash{background:var(--err)}
+@keyframes blink{50%{opacity:.3}}
+.gtop .hist{margin:0;min-height:0;flex-wrap:nowrap;overflow:hidden;justify-content:flex-end}
+#acv{border-radius:0;background:transparent;aspect-ratio:340/240}
+.panel{border:1px solid var(--line);border-radius:22px;padding:16px 16px 14px;margin-top:12px;background:linear-gradient(140deg,#14151b,#0a0a0c)}
+.panel .field{margin-bottom:12px}
+.go.cash{background:var(--ok);color:#000;font-size:1.1rem;padding:18px;animation:pulse 1.2s infinite}
+.go.cash::after{display:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(155,232,181,.5)}70%,100%{box-shadow:0 0 0 14px rgba(155,232,181,0)}}
 .grow{display:flex;gap:10px;margin-top:12px}
 .grow .go{margin-top:0}
 #v-home.on>.pane{animation-duration:.28s;animation-delay:0s}
@@ -176,13 +204,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
         <div class="tile"><small>Sign-in method</small><b id="t-via">-</b></div>
         <div class="tile"><small>Payment methods</small><b id="t-pay">0</b></div>
       </div>
+      <div class="quick"><div><strong>Aviator</strong><small>Play with free coins</small></div><button class="go" id="qplay" type="button">Play</button></div>
     </div>
     <div class="pane" id="p-pay" hidden>
       <h1>Payments</h1>
       <p class="sub">Your saved payment methods.</p>
+      <div class="gstats"><div class="tile"><small>Saved methods</small><b id="pcount">0</b></div><div class="tile"><small>Stored on</small><b>This device</b></div></div>
       <div id="plist"></div>
       <button class="go ghost" id="addbtn" type="button">Add payment method</button>
-      <div id="addbox" hidden>
+      <div id="addbox" class="panel" hidden>
         <div class="seg"><button type="button" data-t="upi" class="on">UPI</button><button type="button" data-t="card">Card</button></div>
         <form id="addpay" novalidate>
           <div id="f-upi">
@@ -203,28 +233,37 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     </div>
 
     <div class="pane" id="p-game" hidden>
-      <p class="eyebrow">Take a break</p>
+      <p class="eyebrow">Practice mode with free coins</p>
       <h1>Aviator</h1>
+      <p class="sub">Cash out before the plane flies away.</p>
       <div class="gstats">
         <div class="tile"><small>Coins</small><b id="abal">1000</b></div>
         <div class="tile"><small>Best cash-out</small><b id="abest">0.00x</b></div>
       </div>
-      <div class="gwrap"><canvas id="acv" width="320" height="230"></canvas></div>
-      <div class="hist gap" id="ahist" aria-label="Previous rounds"></div>
-      <div class="field"><input id="abet" type="number" inputmode="numeric" min="10" step="1" value="50" placeholder=" "><label for="abet">Bet (coins)</label><span class="msg"></span></div>
-      <div class="chips" id="achips"><button type="button" data-v="10">10</button><button type="button" data-v="50">50</button><button type="button" data-v="100">100</button><button type="button" data-v="500">500</button></div>
-      <button class="go" id="abtn" type="button">Place bet</button>
-      <p class="note">Practice mode with free coins only. No real money is used. Place a bet before takeoff, then cash out before the plane flies away. <button class="link" id="areset" type="button">Reset coins</button></p>
+      <div class="gwrap">
+        <div class="gtop"><div class="live"><i id="adot" class="wait"></i><span id="astat">Place your bets</span></div><div class="hist" id="ahist" aria-label="Previous rounds"></div></div>
+        <canvas id="acv" width="340" height="240"></canvas>
+      </div>
+      <div class="panel">
+        <div class="field"><input id="abet" type="number" inputmode="numeric" min="10" step="1" value="50" placeholder=" "><label for="abet">Bet (coins)</label><span class="msg"></span></div>
+        <div class="chips" id="achips"><button type="button" data-a="min">Min</button><button type="button" data-a="half">Half</button><button type="button" data-a="dbl">Double</button><button type="button" data-a="max">Max</button></div>
+        <button class="go" id="abtn" type="button">Place bet</button>
+        <p class="note">No real money is used. Bet before takeoff, then cash out in time. <button class="link" id="areset" type="button">Reset coins</button></p>
+      </div>
     </div>
 
     <div class="pane" id="p-me" hidden>
       <h1>Profile</h1>
-      <div class="me gap"><div class="av" id="av"></div><div><small>Signed in as</small><span id="he"></span></div></div>
-      <div class="field"><input id="pname" type="text" autocomplete="name" placeholder=" "><label for="pname">Your name</label><span class="msg"></span></div>
-      <button class="go ghost" id="savename" type="button">Save name</button>
-      <div class="card gap"><b>Verified</b><br>Your account is active and this device is signed in.</div>
-      <button class="go ghost" id="reset" type="button">Send password reset email</button>
-      <button class="go ghost gap" id="out" type="button">Log out</button>
+      <div class="pcard"><div class="av" id="av"></div><h2 id="pdn"></h2><span class="em" id="he"></span><span class="badge">✓ Email verified</span></div>
+      <div class="tiles"><div class="tile"><small>Member since</small><b id="ps-since">-</b></div><div class="tile"><small>Sign-in method</small><b id="ps-via">-</b></div></div>
+      <div class="panel">
+        <div class="field"><input id="pname" type="text" autocomplete="name" placeholder=" "><label for="pname">Your name</label><span class="msg"></span></div>
+        <button class="go" id="savename" type="button">Save name</button>
+      </div>
+      <div class="panel">
+        <button class="go ghost" id="reset" type="button">Send password reset email</button>
+        <button class="go ghost danger gap" id="out" type="button">Log out</button>
+      </div>
     </div>
 
     <nav class="nav" aria-label="Sections">
@@ -370,6 +409,7 @@ function setAvatar(){
   const av=$("#av");av.textContent="";
   if(me.photoURL){const im=document.createElement("img");im.alt="";im.referrerPolicy="no-referrer";im.src=me.photoURL;av.appendChild(im)}
   else av.textContent=((me.displayName||me.email||"?")[0]).toUpperCase();
+  $("#pdn").textContent=me.displayName||"Add your name";
 }
 function renderDash(){
   $("#greet").textContent="Welcome to Black Side";
@@ -397,9 +437,10 @@ function renderDash(){
   $("#t-last").textContent=fmt(me.metadata.lastSignInTime);
   $("#t-via").textContent=me.providerData.some(p=>p.providerId==="google.com")?"Google":"Email";
   $("#t-pay").textContent=pay.length;
+  $("#ps-since").textContent=$("#t-since").textContent;$("#ps-via").textContent=$("#t-via").textContent;
 }
 function renderPay(){
-  const l=$("#plist");l.textContent="";
+  const l=$("#plist");l.textContent="";$("#pcount").textContent=pay.length;
   if(!pay.length){const p=document.createElement("p");p.className="empty";p.textContent="No payment methods yet.";l.appendChild(p);return}
   const mk=(c,t)=>{const e=document.createElement("div");e.className=c;if(t!=null)e.textContent=t;return e};
   pay.forEach((m,i)=>{
@@ -463,25 +504,29 @@ $("#reset").addEventListener("click",async()=>{
   catch(err){toast(errText(err))}
 });
 
+$("#qplay").addEventListener("click",()=>tab("game"));
+
 // GAME (Aviator, practice coins only)
-const acv=$("#acv"),ax=acv.getContext("2d"),AW=acv.width,AH=acv.height,AK=.12;
-let aPhase="wait",aRaf=0,aT0=0,aTend=0,aCrashT=0,aWaitEnd=0,aCrash=2,aMult=1,aBet=0,aBal=1000,aBest=0,aHist=[],aOn=false,aNote="",aBtnTxt="";
+const acv=$("#acv"),ax=acv.getContext("2d"),AW=340,AH=240,AK=.12,DPR=Math.min(2,window.devicePixelRatio||1);
+acv.width=AW*DPR;acv.height=AH*DPR;
+let aPhase="wait",aRaf=0,aT0=0,aTend=0,aCrashT=0,aWaitEnd=0,aCrash=2,aMult=1,aBet=0,aBal=1000,aBest=0,aHist=[],aOn=false,aNote="",aBtnTxt="",aFloat=null;
 const aKey=()=>"bs_av_"+(me?me.uid:"x");
 function aLoad(){try{const d=JSON.parse(localStorage.getItem(aKey())||"{}");aBal=Number.isFinite(d.bal)?d.bal:1000;aBest=d.best||0;aHist=Array.isArray(d.hist)?d.hist:[]}catch(e){aBal=1000;aBest=0;aHist=[]}}
 function aSave(){try{localStorage.setItem(aKey(),JSON.stringify({bal:aBal,best:aBest,hist:aHist.slice(0,12)}))}catch(e){}}
 const aPoint=()=>{const r=Math.random();return Math.min(200,Math.max(1,Math.floor(97/(1-r))/100))};
 function aBtn(){
-  const b=$("#abtn");let t,d=false;
-  if(aPhase==="wait")t=aBet?"Cancel bet ("+aBet+")":"Place bet";
-  else if(aPhase==="fly"&&aBet)t="Cash out "+Math.floor(aBet*aMult);
-  else{t=aPhase==="fly"?"Round in progress":"Next round soon";d=true}
-  if(t!==aBtnTxt){b.textContent=t;aBtnTxt=t}
+  const b=$("#abtn");let t,c="go",d=false;
+  if(aPhase==="wait"){t=aBet?"Cancel bet ("+aBet+")":"Place bet";c=aBet?"go ghost":"go"}
+  else if(aPhase==="fly"&&aBet){t="Cash out "+Math.floor(aBet*aMult)+" coins";c="go cash"}
+  else{t=aPhase==="fly"?"Round in progress":"Next round soon";c="go ghost";d=true}
+  if(t+c!==aBtnTxt){b.textContent=t;b.className=c;aBtnTxt=t+c}
   if(b.disabled!==d)b.disabled=d;
 }
 function aUI(){
   $("#abal").textContent=aBal;
   $("#abest").textContent=aBest.toFixed(2)+"x";
   $("#abet").disabled=!!aBet;
+  $("#adot").className=aPhase;$("#astat").textContent=aPhase==="wait"?"Place your bets":aPhase==="fly"?"In flight":"Flew away";
   const h=$("#ahist");h.textContent="";
   aHist.slice(0,10).forEach(v=>{const e=document.createElement("span");e.textContent=Number(v).toFixed(2)+"x";if(v>=2)e.className="hi";h.appendChild(e)});
   aBtn();
@@ -490,7 +535,7 @@ function aNewRound(){aPhase="wait";aWaitEnd=performance.now()+5000;aMult=1;aCras
 function aCash(auto){
   if(aPhase!=="fly"||!aBet)return;
   const win=Math.floor(aBet*aMult);aBal+=win;aBest=Math.max(aBest,aMult);
-  aNote="Cashed out at "+aMult.toFixed(2)+"x";
+  aNote="Cashed out at "+aMult.toFixed(2)+"x";aFloat={t:performance.now(),txt:"+"+(win-aBet)+" coins"};
   if(!auto)toast("Cashed out at "+aMult.toFixed(2)+"x. You won "+(win-aBet)+" coins.");
   aBet=0;aSave();aUI();
 }
@@ -510,45 +555,50 @@ function aLoop(now){
   aRaf=requestAnimationFrame(aLoop);
 }
 function aXY(t){
-  const m=Math.exp(AK*t),L=Math.log(m);
-  return [26+(AW-80)*(t/(t+7)),AH-28-(AH-80)*(L/(L+1.2))];
+  const L=AK*t;
+  return [28+(AW-90)*(t/(t+7)),AH-30-(AH-90)*(L/(L+1.2))];
 }
-function aPlane(x,y,a,col,al){
-  ax.save();ax.globalAlpha=al;ax.translate(x,y);ax.rotate(a);ax.fillStyle=col;
-  ax.beginPath();ax.moveTo(17,0);ax.lineTo(-11,-8);ax.lineTo(-5,0);ax.lineTo(-11,8);ax.closePath();ax.fill();ax.restore();
+function aPlane(x,y,a,c,al){
+  ax.save();ax.globalAlpha=al;ax.translate(x,y);ax.rotate(a);ax.shadowColor=c;ax.shadowBlur=12;ax.fillStyle=c;
+  ax.beginPath();[[20,0],[4,-4],[-6,-15],[-10,-15],[-5,-3],[-14,-3],[-17,-8],[-20,-8],[-17,0],[-20,8],[-17,8],[-14,3],[-5,3],[-10,15],[-6,15],[4,4]].forEach((q,i)=>i?ax.lineTo(q[0],q[1]):ax.moveTo(q[0],q[1]));
+  ax.closePath();ax.fill();ax.restore();
 }
 function aDraw(now){
-  ax.clearRect(0,0,AW,AH);
-  ax.fillStyle="#22222c";
-  for(let i=14;i<AW;i+=28)for(let j=14;j<AH;j+=28){ax.beginPath();ax.arc(i,j,1.2,0,7);ax.fill()}
-  const crashed=aPhase==="crash",col=crashed?"#ff7a7a":"#b9c4ff";
-  const t=aPhase==="fly"?(now-aT0)/1000:crashed?aTend:0;
-  const n=40,pts=[];
+  ax.setTransform(DPR,0,0,DPR,0,0);ax.clearRect(0,0,AW,AH);
+  const crashed=aPhase==="crash",fly=aPhase==="fly";
+  const hue=crashed?"#ff7a7a":aMult>=2?"#9be8b5":"#b9c4ff";
+  const bg=ax.createRadialGradient(AW*.25,AH,10,AW*.25,AH,AW);
+  bg.addColorStop(0,crashed?"rgba(255,122,122,.2)":"rgba(185,196,255,.18)");bg.addColorStop(1,"rgba(0,0,0,0)");
+  ax.fillStyle=bg;ax.fillRect(0,0,AW,AH);
+  const off=fly?((now-aT0)/40)%28:0;ax.fillStyle="#2a2a35";
+  for(let i=-14-off;i<AW;i+=28)for(let j=14;j<AH;j+=28){ax.beginPath();ax.arc(i,j,1.2,0,7);ax.fill()}
+  const t=fly?(now-aT0)/1000:crashed?aTend:0,n=40,pts=[];
   for(let i=0;i<=n;i++)pts.push(aXY(t*i/n));
   if(aPhase!=="wait"){
-    ax.beginPath();ax.moveTo(pts[0][0],AH-28);
-    pts.forEach(q=>ax.lineTo(q[0],q[1]));
-    ax.lineTo(pts[n][0],AH-28);ax.closePath();
-    const g=ax.createLinearGradient(0,0,0,AH);g.addColorStop(0,crashed?"rgba(255,122,122,.22)":"rgba(185,196,255,.25)");g.addColorStop(1,"rgba(0,0,0,0)");
+    ax.beginPath();ax.moveTo(pts[0][0],AH);pts.forEach(q=>ax.lineTo(q[0],q[1]));ax.lineTo(pts[n][0],AH);ax.closePath();
+    const g=ax.createLinearGradient(0,0,0,AH);g.addColorStop(0,crashed?"rgba(255,122,122,.25)":"rgba(185,196,255,.28)");g.addColorStop(1,"rgba(0,0,0,0)");
     ax.fillStyle=g;ax.fill();
     ax.beginPath();pts.forEach((q,i)=>i?ax.lineTo(q[0],q[1]):ax.moveTo(q[0],q[1]));
-    ax.lineWidth=3;ax.lineJoin="round";ax.strokeStyle=col;ax.stroke();
+    ax.lineWidth=3.5;ax.lineJoin="round";ax.lineCap="round";ax.strokeStyle=hue;ax.shadowColor=hue;ax.shadowBlur=14;ax.stroke();ax.shadowBlur=0;
   }
-  const e=pts[n],p=pts[Math.max(0,n-3)];
-  let a=Math.atan2(e[1]-p[1],e[0]-p[0]);if(e[0]===p[0]&&e[1]===p[1])a=-.35;
-  if(crashed){const k=Math.min(1,(now-aCrashT)/700);aPlane(e[0]+k*90,e[1]-k*40,a,col,1-k)}
+  const e=pts[n],q=pts[Math.max(0,n-3)];
+  let a=Math.atan2(e[1]-q[1],e[0]-q[0]);if(e[0]===q[0]&&e[1]===q[1])a=-.3;
+  if(crashed){const k=Math.min(1,(now-aCrashT)/700);aPlane(e[0]+k*100,e[1]-k*50,a,hue,1-k);
+    if(now-aCrashT<400){ax.fillStyle="rgba(255,122,122,"+(.22*(1-(now-aCrashT)/400))+")";ax.fillRect(0,0,AW,AH)}}
   else aPlane(e[0],e[1],a,"#f3f1ec",1);
-  ax.textAlign="center";
+  ax.textAlign="center";ax.shadowColor=hue;
   if(aPhase==="wait"){
     const s=Math.max(1,Math.ceil((aWaitEnd-now)/1000));
-    ax.fillStyle="#f3f1ec";ax.font="800 24px Syne, Arial Black, sans-serif";ax.fillText("Takeoff in "+s+"s",AW/2,AH/2-4);
-    ax.fillStyle="#9b9ba6";ax.font="14px Manrope, sans-serif";ax.fillText(aBet?"Bet placed: "+aBet+" coins":"Place your bet",AW/2,AH/2+24);
+    ax.shadowBlur=0;ax.fillStyle="#f3f1ec";ax.font="800 26px Syne, Arial Black, sans-serif";ax.fillText("Takeoff in "+s+"s",AW/2,AH/2);
+    ax.fillStyle="#9b9ba6";ax.font="14px Manrope, sans-serif";ax.fillText(aBet?"Bet placed: "+aBet+" coins":"Place your bet below",AW/2,AH/2+28);
   }else{
-    ax.fillStyle=crashed?"#ff7a7a":"#f3f1ec";ax.font="800 46px Syne, Arial Black, sans-serif";ax.fillText(aMult.toFixed(2)+"x",AW/2,AH/2+6);
-    ax.font="14px Manrope, sans-serif";
-    if(crashed){ax.fillStyle="#ff7a7a";ax.fillText("Flew away",AW/2,AH/2+32)}
-    else if(aNote){ax.fillStyle="#9be8b5";ax.fillText(aNote,AW/2,AH/2+32)}
+    ax.shadowBlur=crashed?0:18;ax.fillStyle=crashed?"#ff7a7a":"#f3f1ec";ax.font="800 56px Syne, Arial Black, sans-serif";ax.fillText(aMult.toFixed(2)+"x",AW/2,AH/2+8);
+    ax.shadowBlur=0;ax.font="600 14px Manrope, sans-serif";
+    if(crashed){ax.fillStyle="#ff7a7a";ax.fillText("Flew away",AW/2,AH/2+36)}
+    else if(aNote){ax.fillStyle="#9be8b5";ax.fillText(aNote,AW/2,AH/2+36)}
   }
+  if(aFloat){const k=(now-aFloat.t)/1400;if(k>=1)aFloat=null;else{ax.globalAlpha=1-k;ax.fillStyle="#9be8b5";ax.font="800 22px Syne, Arial Black, sans-serif";ax.fillText(aFloat.txt,AW/2,AH/2-52-k*30);ax.globalAlpha=1}}
+  ax.shadowBlur=0;
 }
 function avStart(){if(aOn)return;aOn=true;aLoad();aBet=0;aNote="";aNewRound();aRaf=requestAnimationFrame(aLoop)}
 function avStop(){
@@ -568,7 +618,7 @@ $("#abtn").addEventListener("click",()=>{
     aSave();aUI();
   }else if(aPhase==="fly"&&aBet)aCash();
 });
-document.querySelectorAll("#achips button").forEach(b=>b.addEventListener("click",()=>{const i=$("#abet");if(i.disabled)return;i.value=b.dataset.v;flag(i,"")}));
+document.querySelectorAll("#achips button").forEach(b=>b.addEventListener("click",()=>{const i=$("#abet");if(i.disabled)return;const v=Math.floor(Number(i.value))||10,a=b.dataset.a;i.value=a==="min"?10:a==="half"?Math.max(10,Math.floor(v/2)):a==="dbl"?Math.max(10,Math.min(aBal,v*2)):Math.max(10,aBal);flag(i,"")}));
 $("#areset").addEventListener("click",()=>{if(aBet){toast("Finish or cancel your bet first.");return}aBal=1000;aSave();aUI();toast("Coins reset to 1000.")});
 document.addEventListener("visibilitychange",()=>{if(document.hidden)avStop();else if(view==="home"&&!$("#p-game").hidden)avStart()});
 

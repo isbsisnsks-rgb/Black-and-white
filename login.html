@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Manrope:wght@400;500;600&display=swap">
 <style>
-:root{color-scheme:dark;--bg:#000;--ink:#f3f1ec;--dim:#8a8a8a;--line:#2a2a2a;--glow:#b9c4ff;--err:#ff7a7a;--ok:#9be8b5;
+:root{color-scheme:dark;--bg:#000;--ink:#f3f1ec;--dim:#9b9ba6;--line:#2a2a2a;--glow:#b9c4ff;--err:#ff7a7a;--ok:#9be8b5;
 --display:"Syne","Arial Black",system-ui,sans-serif;--body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -29,7 +29,9 @@ main{position:relative;height:100%;max-width:360px;margin:0 auto;padding:76px 26
 .view.on>:nth-child(2){animation-delay:.08s}.view.on>:nth-child(3){animation-delay:.16s}.view.on>:nth-child(4){animation-delay:.24s}.view.on>:nth-child(5){animation-delay:.32s}.view.on>:nth-child(6){animation-delay:.4s}
 @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,8.2vw,2.3rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:normal}
-.sub{margin:0 0 26px;color:var(--dim);font-size:.9rem;line-height:1.55;overflow-wrap:anywhere}
+.sub{margin:0 0 26px;color:var(--dim);font-size:.95rem;line-height:1.6;overflow-wrap:anywhere}
+.pane h1{font-size:clamp(1.5rem,7.4vw,2.1rem);letter-spacing:-.01em;white-space:nowrap;background:linear-gradient(100deg,#fff 45%,var(--glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+#hi{white-space:normal;overflow-wrap:anywhere}
 .sub b{color:var(--ink);font-weight:600;word-break:break-all}
 .field{position:relative;margin-bottom:18px}
 .field input{width:100%;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:500 1.05rem var(--body);padding:20px 52px 8px 0;border-radius:0;outline:none;transition:border-color .25s}
@@ -74,7 +76,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .gap{margin-top:10px}
 .ver{position:fixed;left:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 6px);font-size:.62rem;color:#444;pointer-events:none;z-index:1}
-.eyebrow{margin:0 0 6px;color:var(--glow);font-size:.82rem;font-weight:600}
+.eyebrow{margin:0 0 8px;color:var(--glow);font-size:.85rem;font-weight:600;letter-spacing:.02em}
 .hero{display:flex;align-items:center;gap:16px;border:1px solid #2f2f2f;border-radius:22px;padding:16px;margin:4px 0 14px;background:linear-gradient(140deg,#14151b,#0a0a0c)}
 .hero strong{display:block;font:700 1.05rem var(--display);margin-bottom:3px}
 .hero small{color:var(--dim);font-size:.82rem}
@@ -92,9 +94,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .tile{border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}
 .tile small{display:block;color:var(--dim);font-size:.72rem;margin-bottom:6px}
-.tile b{display:block;font:700 .98rem var(--display);overflow-wrap:anywhere}
-.nav{position:fixed;z-index:3;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);left:0;right:0;width:min(320px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);padding:6px;border:1px solid #2f2f2f;border-radius:26px;background:rgba(14,14,16,.78);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06)}
-.ind{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/3);border-radius:20px;background:linear-gradient(160deg,#fff,#d9deff);box-shadow:0 6px 20px rgba(185,196,255,.25);transition:transform .38s cubic-bezier(.3,1.3,.5,1)}
+.tile b{display:block;font:800 .95rem var(--display);letter-spacing:.01em;overflow-wrap:anywhere}
+.nav{position:fixed;z-index:3;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);left:0;right:0;width:min(360px,calc(100% - 32px));margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding:6px;border:1px solid #2f2f2f;border-radius:26px;background:rgba(14,14,16,.78);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06)}
+.ind{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/4);border-radius:20px;background:linear-gradient(160deg,#fff,#d9deff);box-shadow:0 6px 20px rgba(185,196,255,.25);transition:transform .38s cubic-bezier(.3,1.3,.5,1)}
 .nav button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;color:var(--dim);font:600 .68rem var(--body);padding:9px 0 8px;cursor:pointer;transition:color .25s}
 .nav button.on{color:#000}
 .nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -105,6 +107,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .pm .num{font:700 1.05rem var(--display);letter-spacing:.12em;margin-bottom:14px;overflow-wrap:anywhere}
 .pm .bot{display:flex;justify-content:space-between;gap:10px;font-size:.8rem;color:var(--dim)}
 .pm .bot span{overflow-wrap:anywhere}
+.gstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.gwrap{border:1px solid var(--line);border-radius:22px;padding:8px;background:linear-gradient(140deg,#14151b,#0a0a0c)}
+#acv{display:block;width:100%;height:auto;border-radius:16px;background:#050508}
+.hist{display:flex;gap:6px;flex-wrap:wrap;min-height:26px;margin:0 0 12px}
+.hist span{font:700 .72rem var(--display);padding:5px 9px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
+.hist span.hi{color:var(--ok);border-color:#2f4a38}
+.chips{display:flex;gap:6px;margin:0 0 12px}
+.chips button{flex:1;padding:9px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--dim);font:600 .85rem var(--body);cursor:pointer}
+.chips button:active{color:var(--ink);border-color:var(--glow)}
+.go[disabled]{cursor:default}
+.grow{display:flex;gap:10px;margin-top:12px}
+.grow .go{margin-top:0}
 #v-home.on>.pane{animation-duration:.28s;animation-delay:0s}
 @media (prefers-reduced-motion:reduce){.nav button,.ind,.rf{transition:none}.view.on>*,.brand,.go::after,.shake{animation:none}.field label,.go,.toast{transition:none}}
 </style>
@@ -112,7 +126,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <body>
 <div class="grid"></div><div class="halo"></div>
 <div class="brand">Black Side</div>
-<div class="ver">v8</div>
+<div class="ver">v9</div>
 <div class="toast" id="toast" role="status"></div>
 <main>
   <section class="view on" id="v-login">
@@ -188,6 +202,21 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
       </div>
     </div>
 
+    <div class="pane" id="p-game" hidden>
+      <p class="eyebrow">Take a break</p>
+      <h1>Aviator</h1>
+      <div class="gstats">
+        <div class="tile"><small>Coins</small><b id="abal">1000</b></div>
+        <div class="tile"><small>Best cash-out</small><b id="abest">0.00x</b></div>
+      </div>
+      <div class="gwrap"><canvas id="acv" width="320" height="230"></canvas></div>
+      <div class="hist gap" id="ahist" aria-label="Previous rounds"></div>
+      <div class="field"><input id="abet" type="number" inputmode="numeric" min="10" step="1" value="50" placeholder=" "><label for="abet">Bet (coins)</label><span class="msg"></span></div>
+      <div class="chips" id="achips"><button type="button" data-v="10">10</button><button type="button" data-v="50">50</button><button type="button" data-v="100">100</button><button type="button" data-v="500">500</button></div>
+      <button class="go" id="abtn" type="button">Place bet</button>
+      <p class="note">Practice mode with free coins only. No real money is used. Place a bet before takeoff, then cash out before the plane flies away. <button class="link" id="areset" type="button">Reset coins</button></p>
+    </div>
+
     <div class="pane" id="p-me" hidden>
       <h1>Profile</h1>
       <div class="me gap"><div class="av" id="av"></div><div><small>Signed in as</small><span id="he"></span></div></div>
@@ -202,6 +231,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
       <span class="ind" id="ind"></span>
       <button type="button" data-tab="dash" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Dashboard</span></button>
       <button type="button" data-tab="pay"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10.5h18"/></svg><span>Payments</span></button>
+      <button type="button" data-tab="game"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 20.5 4l-7 16.5-2.5-6.5z"/><path d="m11 14 9.5-10"/></svg><span>Game</span></button>
       <button type="button" data-tab="me"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg><span>Profile</span></button>
     </nav>
   </section>
@@ -329,8 +359,9 @@ function savePay(){try{localStorage.setItem(payKey(),JSON.stringify(pay))}catch(
 function tab(n){
   document.querySelectorAll(".pane").forEach(p=>{p.hidden=p.id!=="p-"+n});
   document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===n));
-  $("#ind").style.transform="translateX("+(["dash","pay","me"].indexOf(n)*100)+"%)";
+  $("#ind").style.transform="translateX("+(["dash","pay","game","me"].indexOf(n)*100)+"%)";
   if(n==="dash")renderDash();
+  if(n==="game")avStart();else avStop();
   $("main").scrollTop=0;
 }
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>tab(b.dataset.tab)));
@@ -432,9 +463,118 @@ $("#reset").addEventListener("click",async()=>{
   catch(err){toast(errText(err))}
 });
 
+// GAME (Aviator, practice coins only)
+const acv=$("#acv"),ax=acv.getContext("2d"),AW=acv.width,AH=acv.height,AK=.12;
+let aPhase="wait",aRaf=0,aT0=0,aTend=0,aCrashT=0,aWaitEnd=0,aCrash=2,aMult=1,aBet=0,aBal=1000,aBest=0,aHist=[],aOn=false,aNote="",aBtnTxt="";
+const aKey=()=>"bs_av_"+(me?me.uid:"x");
+function aLoad(){try{const d=JSON.parse(localStorage.getItem(aKey())||"{}");aBal=Number.isFinite(d.bal)?d.bal:1000;aBest=d.best||0;aHist=Array.isArray(d.hist)?d.hist:[]}catch(e){aBal=1000;aBest=0;aHist=[]}}
+function aSave(){try{localStorage.setItem(aKey(),JSON.stringify({bal:aBal,best:aBest,hist:aHist.slice(0,12)}))}catch(e){}}
+const aPoint=()=>{const r=Math.random();return Math.min(200,Math.max(1,Math.floor(97/(1-r))/100))};
+function aBtn(){
+  const b=$("#abtn");let t,d=false;
+  if(aPhase==="wait")t=aBet?"Cancel bet ("+aBet+")":"Place bet";
+  else if(aPhase==="fly"&&aBet)t="Cash out "+Math.floor(aBet*aMult);
+  else{t=aPhase==="fly"?"Round in progress":"Next round soon";d=true}
+  if(t!==aBtnTxt){b.textContent=t;aBtnTxt=t}
+  if(b.disabled!==d)b.disabled=d;
+}
+function aUI(){
+  $("#abal").textContent=aBal;
+  $("#abest").textContent=aBest.toFixed(2)+"x";
+  $("#abet").disabled=!!aBet;
+  const h=$("#ahist");h.textContent="";
+  aHist.slice(0,10).forEach(v=>{const e=document.createElement("span");e.textContent=Number(v).toFixed(2)+"x";if(v>=2)e.className="hi";h.appendChild(e)});
+  aBtn();
+}
+function aNewRound(){aPhase="wait";aWaitEnd=performance.now()+5000;aMult=1;aCrash=aPoint();aUI()}
+function aCash(auto){
+  if(aPhase!=="fly"||!aBet)return;
+  const win=Math.floor(aBet*aMult);aBal+=win;aBest=Math.max(aBest,aMult);
+  aNote="Cashed out at "+aMult.toFixed(2)+"x";
+  if(!auto)toast("Cashed out at "+aMult.toFixed(2)+"x. You won "+(win-aBet)+" coins.");
+  aBet=0;aSave();aUI();
+}
+function aBoom(now){
+  aPhase="crash";aCrashT=now;aWaitEnd=now+2800;aTend=Math.log(aCrash)/AK;
+  if(aBet){toast("Flew away at "+aCrash.toFixed(2)+"x. You lost "+aBet+" coins.");aBet=0;aNote=""}
+  aHist.unshift(aCrash);aSave();aUI();
+}
+function aLoop(now){
+  if(!aOn)return;
+  if(aPhase==="wait"){if(now>=aWaitEnd){aPhase="fly";aT0=now;aNote="";aUI()}}
+  else if(aPhase==="fly"){
+    aMult=Math.exp(AK*(now-aT0)/1000);
+    if(aMult>=aCrash){aMult=aCrash;aBoom(now)}else aBtn();
+  }else if(now>=aWaitEnd)aNewRound();
+  aDraw(now);
+  aRaf=requestAnimationFrame(aLoop);
+}
+function aXY(t){
+  const m=Math.exp(AK*t),L=Math.log(m);
+  return [26+(AW-80)*(t/(t+7)),AH-28-(AH-80)*(L/(L+1.2))];
+}
+function aPlane(x,y,a,col,al){
+  ax.save();ax.globalAlpha=al;ax.translate(x,y);ax.rotate(a);ax.fillStyle=col;
+  ax.beginPath();ax.moveTo(17,0);ax.lineTo(-11,-8);ax.lineTo(-5,0);ax.lineTo(-11,8);ax.closePath();ax.fill();ax.restore();
+}
+function aDraw(now){
+  ax.clearRect(0,0,AW,AH);
+  ax.fillStyle="#22222c";
+  for(let i=14;i<AW;i+=28)for(let j=14;j<AH;j+=28){ax.beginPath();ax.arc(i,j,1.2,0,7);ax.fill()}
+  const crashed=aPhase==="crash",col=crashed?"#ff7a7a":"#b9c4ff";
+  const t=aPhase==="fly"?(now-aT0)/1000:crashed?aTend:0;
+  const n=40,pts=[];
+  for(let i=0;i<=n;i++)pts.push(aXY(t*i/n));
+  if(aPhase!=="wait"){
+    ax.beginPath();ax.moveTo(pts[0][0],AH-28);
+    pts.forEach(q=>ax.lineTo(q[0],q[1]));
+    ax.lineTo(pts[n][0],AH-28);ax.closePath();
+    const g=ax.createLinearGradient(0,0,0,AH);g.addColorStop(0,crashed?"rgba(255,122,122,.22)":"rgba(185,196,255,.25)");g.addColorStop(1,"rgba(0,0,0,0)");
+    ax.fillStyle=g;ax.fill();
+    ax.beginPath();pts.forEach((q,i)=>i?ax.lineTo(q[0],q[1]):ax.moveTo(q[0],q[1]));
+    ax.lineWidth=3;ax.lineJoin="round";ax.strokeStyle=col;ax.stroke();
+  }
+  const e=pts[n],p=pts[Math.max(0,n-3)];
+  let a=Math.atan2(e[1]-p[1],e[0]-p[0]);if(e[0]===p[0]&&e[1]===p[1])a=-.35;
+  if(crashed){const k=Math.min(1,(now-aCrashT)/700);aPlane(e[0]+k*90,e[1]-k*40,a,col,1-k)}
+  else aPlane(e[0],e[1],a,"#f3f1ec",1);
+  ax.textAlign="center";
+  if(aPhase==="wait"){
+    const s=Math.max(1,Math.ceil((aWaitEnd-now)/1000));
+    ax.fillStyle="#f3f1ec";ax.font="800 24px Syne, Arial Black, sans-serif";ax.fillText("Takeoff in "+s+"s",AW/2,AH/2-4);
+    ax.fillStyle="#9b9ba6";ax.font="14px Manrope, sans-serif";ax.fillText(aBet?"Bet placed: "+aBet+" coins":"Place your bet",AW/2,AH/2+24);
+  }else{
+    ax.fillStyle=crashed?"#ff7a7a":"#f3f1ec";ax.font="800 46px Syne, Arial Black, sans-serif";ax.fillText(aMult.toFixed(2)+"x",AW/2,AH/2+6);
+    ax.font="14px Manrope, sans-serif";
+    if(crashed){ax.fillStyle="#ff7a7a";ax.fillText("Flew away",AW/2,AH/2+32)}
+    else if(aNote){ax.fillStyle="#9be8b5";ax.fillText(aNote,AW/2,AH/2+32)}
+  }
+}
+function avStart(){if(aOn)return;aOn=true;aLoad();aBet=0;aNote="";aNewRound();aRaf=requestAnimationFrame(aLoop)}
+function avStop(){
+  if(!aOn)return;
+  if(aPhase==="fly"&&aBet)aCash(true);
+  else if(aBet){aBal+=aBet;aBet=0;aSave()}
+  aOn=false;cancelAnimationFrame(aRaf);
+}
+$("#abtn").addEventListener("click",()=>{
+  if(aPhase==="wait"){
+    if(aBet){aBal+=aBet;aBet=0}
+    else{
+      const i=$("#abet"),v=Math.floor(Number(i.value));
+      if(!flag(i,v>aBal?"Not enough coins":v>=10?"":"Minimum bet is 10 coins"))return;
+      aBal-=v;aBet=v;
+    }
+    aSave();aUI();
+  }else if(aPhase==="fly"&&aBet)aCash();
+});
+document.querySelectorAll("#achips button").forEach(b=>b.addEventListener("click",()=>{const i=$("#abet");if(i.disabled)return;i.value=b.dataset.v;flag(i,"")}));
+$("#areset").addEventListener("click",()=>{if(aBet){toast("Finish or cancel your bet first.");return}aBal=1000;aSave();aUI();toast("Coins reset to 1000.")});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)avStop();else if(view==="home"&&!$("#p-game").hidden)avStart()});
+
 // ROUTING
 function route(u){
-  if(!u){if(view==="home"||view==="verify")show("login");return}
+  if(!u){avStop();if(view==="home"||view==="verify")show("login");return}
   ["#le","#lp","#se","#sp"].forEach(s=>{const i=$(s);i.value="";flag(i,"")});
   $("#vm").textContent="";
   if(!u.emailVerified){$("#ve").textContent=u.email;show("verify");return}
